@@ -19,21 +19,21 @@ public class NormaliseCsv{
 	
 
 	
-	//	public static String MYDIR = "src/main/resources/";
 	
 		public void doThings(){
 			try {
 	            File rawFile = new File(Utilities.getUnormalisedTrainingDataPath());
 
-	            // download Iris data from UCI
+	            
 	            if (rawFile.exists()) {
 	                System.out.println("Data already downloaded to: " + rawFile.getPath());
 	            } else {
-	                System.out.println("Please make sure u have uploaded data to : " + rawFile.getPath());
-	                
+	            	
+	            	
+	            	System.out.println("there is no training data, please provide data in the resources path");
 	            }
 
-	            // define the format of the iris data
+	            
 
 	            DataNormalization norm = new DataNormalization();
 	            InputField inputSepalLength, inputSepalWidth, inputPetalLength, inputPetalWidth;

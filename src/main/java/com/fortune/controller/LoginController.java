@@ -21,13 +21,24 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
+	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public ModelAndView login(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("testLogin");
 		return modelAndView;
 	}
+	@RequestMapping(value= {"/", "/home"}, method = RequestMethod.GET)
+	public ModelAndView homePage(){
+		ModelAndView modelAndView = new ModelAndView();
+		//modelAndView.setViewName("index");
+		
+		modelAndView.setViewName("testUpload");
+		return modelAndView;
+		
+	}
 	
+	
+
 	
 	@RequestMapping(value="/registration", method = RequestMethod.GET)
 	public ModelAndView registration(){
@@ -59,16 +70,26 @@ public class LoginController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/admin/home", method = RequestMethod.GET)
-	public ModelAndView home(){
+	/*@RequestMapping(value="/home", method = RequestMethod.GET)
+	public ModelAndView UserHomePage(){
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
 		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
-		modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
-		modelAndView.setViewName("admin/home");
+		modelAndView.addObject("adminMessage","Content Available Only for Users ");
+		modelAndView.setViewName("HomePage");
 		return modelAndView;
 	}
-	
+	*/
+	@RequestMapping(value="/home", method = RequestMethod.GET)
+	public ModelAndView AdminHomePage(){
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+		modelAndView.addObject("adminMessage","Content Available Only for Users ");
+		modelAndView.setViewName("admin/");
+		return modelAndView;
+	}
 
 }

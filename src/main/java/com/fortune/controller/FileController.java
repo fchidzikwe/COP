@@ -46,4 +46,18 @@ public class FileController{
 	        return modelAndView;
 
 	}
+	
+	@RequestMapping(value="/testupload", method = RequestMethod.GET)
+	public ModelAndView homePage(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin/UploadTrainingData");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="/testUpload", method = RequestMethod.GET)
+	public ModelAndView uploadPage(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("testUpload");
+		return modelAndView;
+	}
 }

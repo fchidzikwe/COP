@@ -6,17 +6,13 @@
 <title>COP</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="@{/css/bootstrap.min.css}">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script
-	src="@{/js/bootstrap.min.js}"></script>
+<link rel="stylesheet" href="@{/css/bootstrap.min.css}">
+
 </head>
 
 <body>
 
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-tab">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -62,12 +58,17 @@
 		<h1>My First Bootstrap Page</h1>
 		<p>This is some text.</p>
 	</div>
-	
+
 	<form th:action="@{/uploadCsv}" method="post">
-				<button class="btn btn-md btn-warning btn-block" type="Submit">Upload CSV</button>
-			</form>
-			
-			<span th:utext="${successUploaDMessage}"></span>
+		<button class="btn btn-md btn-warning btn-block" type="Submit">Upload
+			CSV</button>
+	</form>
+
+	<span th:utext="${successUploaDMessage}"></span>
+
+
+	<script src="@{/js/jquery.min.js}"></script>
+	<script src="@{/js/bootstrap.min.js}"></script>
 
 </body>
 </html>

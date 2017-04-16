@@ -2,6 +2,8 @@ package com.fortune.service.impl;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,6 +37,15 @@ public class UserServiceImpl implements UserService{
         Role userRole = roleRepository.findByRole("ADMIN");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		userRepository.save(user);
+	}
+
+	@Override
+	public boolean isAdmin(String  email) {
+		User user = userRepository.findByEmail(email);
+		Set<Role> userRoles = user.getRoles();
+		//search for role if isadmin return true
+		return true;
+		
 	}
 
 }
