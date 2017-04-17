@@ -1,0 +1,141 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="js/papaparse.min.js"></script>
+  <title>Training Data Upload </title>
+  <style>
+	.pdfobject-container { height: 500px;}
+	.pdfobject { border: 1px solid #666; }
+  </style>
+</head>
+<body>
+<nav class=" navbar navbar-dark green" role="navigation">
+
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#example-navbar-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+
+			<a class="navbar-brand" href="#">CHOLERA OUTBREAK PREDICTION</a>
+		</div>
+
+		<div class="collapse navbar-collapse" id="example-navbar-collapse">
+
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="testHome">Home</a></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="testUpload">Administration <span
+						class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="testUpload">Upload</a></li>
+						<li><a href="#">Test</a></li>
+						<li><a href="#">Generate Reports</a></li>
+					</ul></li>
+
+
+
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="registration"><span
+						class="glyphicon glyphicon-pencil"></span> Sign Up</a></li>
+				<li><a href="testLogin"><span
+						class="glyphicon glyphicon-user"></span> Login</a></li>
+				<li><a href="testUpload"><span
+						class="glyphicon glyphicon-user"></span> Donate</a></li>
+			</ul>
+		</div>
+
+	</nav>
+
+
+
+
+  <div class="container" style="padding:10px 10px;">
+    <h1>Browse for Training Data</h1>
+	<div class="well">
+		<div class="row">
+		<form class="form-inline" method="POST" enctype="multipart/form-data" action="/fileupload">
+			<div class="form-group">
+			  <label for="files">Select a CSV formatted file:</label>
+			  <input type="file" id="files"  class="form-control" accept=".csv" required />
+			</div>
+			<div class="form-group">
+			 <button type="submit" id="submit-file" class="btn btn-primary">Upload File</button>
+			 </div>
+			 
+			 <div class="form-group">
+			 <button type="submit" id="normalise-file" class="btn btn-primary">Normalise File</button>
+			 </div>
+			 
+			 <div class="form-group">
+			 <button type="submit" id="save-file" class="btn btn-primary">Save File</button>
+			 </div>
+		</form>
+		
+	
+		</div>
+		
+			
+			<div class="row" id="parsed_csv_list">
+			</div>
+		</div>
+	</div>
+ 
+  
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('#submit-file').on("click",function(e){
+		e.preventDefault();
+		$('#files').parse({
+			config: {
+				delimiter: "auto",
+				complete: displayHTMLTable,
+			},
+			before: function(file, inputElem)
+			{
+				//console.log("Parsing file...", file);
+			},
+			error: function(err, file)
+			{
+				//console.log("ERROR:", err, file);
+			},
+			complete: function()
+			{
+				//console.log("Done with all files");
+			}
+		});
+    });
+	
+	function displayHTMLTable(results){
+		var table = "<table class='table'>";
+		var data = results.data;
+		 
+		for(i=0;i<data.length;i++){
+			table+= "<tr>";
+			var row = data[i];
+			var cells = row.join(",").split(",");
+			 
+			for(j=0;j<cells.length;j++){
+				table+= "<td>";
+				table+= cells[j];
+				table+= "</th>";
+			}
+			table+= "</tr>";
+		}
+		table+= "</table>";
+		$("#parsed_csv_list").html(table);
+	}
+  });
+</script>
+  
+  
+  
+</body>
+</html>

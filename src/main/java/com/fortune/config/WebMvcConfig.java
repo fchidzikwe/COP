@@ -16,6 +16,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
@@ -70,6 +71,13 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	      properties.setProperty("hibernate.dialect", "com.fortune.config.ImprovedMySQLDialect");
 	      return properties;
 	   }
+	   
+	   @Override
+	    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	        registry
+	          .addResourceHandler("/upload/**")
+	          .addResourceLocations("file:/opt/upload/");
+	    }
 	 
 
 }

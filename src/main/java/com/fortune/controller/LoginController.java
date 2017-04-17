@@ -32,7 +32,7 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();
 		//modelAndView.setViewName("index");
 		
-		modelAndView.setViewName("testUpload");
+		modelAndView.setViewName("uploadCSV");
 		return modelAndView;
 		
 	}

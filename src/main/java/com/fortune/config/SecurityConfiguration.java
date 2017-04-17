@@ -58,7 +58,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/").and().exceptionHandling()
-				.accessDeniedPage("/access-denied");
+				.accessDeniedPage("/access-denied")
+                .and()
+                    .formLogin()
+                        .loginPage("/login")
+                        .permitAll()
+                .and()
+                    .rememberMe()
+                        .key("uniqueAndSecret")
+                        .rememberMeCookieName("javasampleapproach-remember-me")
+                        .tokenValiditySeconds(24 * 60 * 60)
+                .and()
+                    .logout()
+                    .deleteCookies("JSESSIONID")
+                    .permitAll();
+ 
 	}
 	
 	@Override
@@ -67,5 +81,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	       .ignoring()
 	       .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
 	}
+	
+	 @Autowired
+	    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+	        auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
+	    }
 
 }
