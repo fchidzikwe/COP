@@ -35,8 +35,8 @@ public class NormalizeFile {
 	public static void main(String[] args) {
 
 	
-			File sourceFile = new File("src/main/resources/iris.csv");
-			File targetFile = new File("src/main/resources/nomarlisedIrisData.csv");
+			File sourceFile = new File(Utilities.getUnormalisedTrainingDataPath());
+			File targetFile = new File(Utilities.getNormalisedTrainingDataPath());
 
 			EncogAnalyst analyst = new EncogAnalyst();
 			AnalystWizard wizard = new AnalystWizard(analyst);

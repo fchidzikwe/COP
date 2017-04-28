@@ -2,6 +2,10 @@ package com.fortune.controller;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +17,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fortune.model.User;
+import com.fortune.service.StorageService;
 import com.fortune.service.UserService;
 
 @Controller
 public class LoginController {
 	
+	 @Autowired
+	  StorageService storageService;
+	
 	@Autowired
 	private UserService userService;
+	
+	List<String> files = new ArrayList<String>();
 
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public ModelAndView login(){
@@ -30,13 +40,15 @@ public class LoginController {
 	@RequestMapping(value= {"/", "/home"}, method = RequestMethod.GET)
 	public ModelAndView homePage(){
 		ModelAndView modelAndView = new ModelAndView();
-		//modelAndView.setViewName("index");
+		modelAndView.setViewName("index");
 		
-		modelAndView.setViewName("uploadCSV");
+	
+	
 		return modelAndView;
 		
 	}
 	
+
 	
 
 	

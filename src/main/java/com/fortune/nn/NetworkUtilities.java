@@ -22,8 +22,10 @@ public class NetworkUtilities {
 	
 	public static BasicNetwork getNetwork(){
 		BasicNetwork network = new BasicNetwork();
-		network.addLayer(new BasicLayer(null,true,2));
-		network.addLayer(new BasicLayer(new ActivationSigmoid(),true,3));
+		network.addLayer(new BasicLayer(null,true,8));
+		network.addLayer(new BasicLayer(new ActivationSigmoid(),true,60));
+		network.addLayer(new BasicLayer(new ActivationSigmoid(),true,50));
+		network.addLayer(new BasicLayer(new ActivationSigmoid(),true,20));
 		network.addLayer(new BasicLayer(new ActivationSigmoid(),false,1));
 		network.getStructure().finalizeStructure();
 		network.reset();
@@ -35,7 +37,8 @@ public class NetworkUtilities {
 	
 	public static MLDataSet getTrainingDataSet(){
 		
-		NormaliseCsv normaliseCsv = new NormaliseCsv();
+		//NormaliseCsv normaliseCsv = new NormaliseCsv();
+		NormaliseTrainingData normaliseCsv = new NormaliseTrainingData();
 		normaliseCsv.doThings();
 		
 		MLDataSet trainingDataSet = EncogUtility.loadCSV2Memory(Utilities.getNormalisedTrainingDataPath(),
@@ -80,7 +83,7 @@ public class NetworkUtilities {
 		
 		propagationContinue.resume(cont);
 		
-		EncogUtility.trainToError(propagationContinue,0.01);
+		EncogUtility.trainToError(propagationContinue,0.10);
 		
 		System.out.println("**************getting last gradients and update values**********");
 		System.out.println(Arrays.toString((double[])cont.getContents().get(ResilientPropagation.LAST_GRADIENTS)));
@@ -127,7 +130,8 @@ public class NetworkUtilities {
 		long start = System.currentTimeMillis();
 		
 		System.out.println(BasicNetwork.TAG_BEGIN_TRAINING);
-		EncogUtility.trainToError(train, 0.01);
+		EncogUtility.trainToError(train, 0.10);
+		//System.out.println("Final MPROP final error: " + network.getWeight(fromLayer, fromNeuron, toNeuron));
 		System.out.println(BasicNetwork.TAG_END_TRAINING);
 
 		
@@ -136,6 +140,7 @@ public class NetworkUtilities {
 		double diff = ((double) (stop - start)) / 1000.0;
 		System.out.println("MPROP time taken to train:" + diff + " seconds.");
 		System.out.println("Final MPROP final error: " + network.calculateError(dataset));
+		System.out.println("*****weights: "+network.dumpWeights());
 		return diff;
 	}
 	
@@ -144,7 +149,9 @@ public class NetworkUtilities {
 		System.out.println("************************************NEURAL NETWORK RESULTS:****************************************");
 		for(MLDataPair pair: dataset ) {
 			final MLData output = network.compute(pair.getInput());
-			System.out.println(pair.getInput().getData(0) + "," + pair.getInput().getData(1)
+			System.out.println(pair.getInput().getData(0) + "," + pair.getInput().getData(1) + "," + pair.getInput().getData(2)
+					+ "," + pair.getInput().getData(3) + "," + pair.getInput().getData(4) + "," + pair.getInput().getData(5)
+					+ "," + pair.getInput().getData(6) + "," + pair.getInput().getData(7)
 					+ ", actual=" + output.getData(0) + ",ideal=" + pair.getIdeal().getData(0));
 		}
 	}

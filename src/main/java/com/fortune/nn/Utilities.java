@@ -1,38 +1,39 @@
 package com.fortune.nn;
 
+
+
+
 public class Utilities {
-	
-	public static String MYDIR = "src/main/resources/";
 
-	
-	public static String getUnormalisedTrainingDataPath(){
-		
-		 return MYDIR.toString()+ "/" + "iris.csv";
-		
-	}
-	
+	 
+	 public static String CSVDIR = "upload";
 
-	public static String getNormalisedTrainingDataPath(){
-		
-		
-		return MYDIR.toString()+ "/" + "iris_normalized.csv";
-	}
-	
-	
-	public static String pathToSaveNnOnPause(){
-		
-		return MYDIR +"/" +"pausedNN";
-	}
-	
-public static String pathToSaveNnOnFinish(){
-		
-		return MYDIR +"/" +"finalNN";
-	}
-	
-	
-	
+	public static String NNDIR = "src/main/resources/";
 
+	public static String filename = "unormalisedTrainingData.csv";
+	public static String normalisedFileName = "normalisedTrainingData.csv";
 
-	
-	
+	public static String getUnormalisedTrainingDataPath() {
+		
+
+		return CSVDIR + "/" + "unormalisedTrainingData.csv";
+
+	}
+
+	public static String getNormalisedTrainingDataPath() {
+		
+		
+	return CSVDIR.toString() + "/" + "normalizedTrainingData.csv";
+	}
+
+	public static String pathToSaveNnOnPause() {
+
+		return NNDIR + "/" + "partialTrainedNeuralNetwork";
+	}
+
+	public static String pathToSaveNnOnFinish() {
+
+		return NNDIR + "/" + "trainedNeuralNetwork";
+	}
+
 }

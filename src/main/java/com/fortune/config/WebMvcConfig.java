@@ -5,8 +5,13 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.MultipartAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -16,12 +21,18 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.MultipartFilter;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
 @EnableTransactionManagement
+@EnableAutoConfiguration(exclude={MultipartAutoConfiguration.class})
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
+	Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -78,6 +89,14 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	          .addResourceHandler("/upload/**")
 	          .addResourceLocations("file:/opt/upload/");
 	    }
+	   
+	  
+	    
+	   @Bean
+	    public MultipartResolver multipartResolver() {
+	        return new StandardServletMultipartResolver();
+	    }
+
 	 
 
 }
