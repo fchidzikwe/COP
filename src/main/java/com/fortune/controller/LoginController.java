@@ -14,9 +14,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fortune.enums.Density;
+import com.fortune.enums.WaterSupply;
+import com.fortune.model.Facility;
 import com.fortune.model.User;
+import com.fortune.service.FacilityService;
 import com.fortune.service.StorageService;
 import com.fortune.service.UserService;
 
@@ -25,6 +30,9 @@ public class LoginController {
 	
 	 @Autowired
 	  StorageService storageService;
+	 
+	 @Autowired
+	  FacilityService  facilityService;
 	
 	@Autowired
 	private UserService userService;
@@ -77,6 +85,54 @@ public class LoginController {
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");
+			
+		}
+		return modelAndView;
+	}
+	
+	
+
+	@RequestMapping(value="/facilityRegistration", method = RequestMethod.GET)
+	public ModelAndView facilityRegistration(){
+		ModelAndView modelAndView = new ModelAndView();
+		Facility facility = new Facility();
+		modelAndView.addObject("facility", facility);
+		modelAndView.setViewName("facilityRegistration");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/facilityRegistration", method = RequestMethod.POST)
+	public ModelAndView createNewFacility(@Valid User user,BindingResult bindingResultUser, @Valid Facility facility,BindingResult bindingResultFacility,  
+			@RequestParam("user_email") String user_email,  BindingResult bindingResultEmail,
+			@RequestParam("density") Density density,  BindingResult bindingResultDensity,
+			@RequestParam("waterSupply") WaterSupply waterSupply,  BindingResult bindingResultWaterSupply
+			) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("density", Density.values());
+		modelAndView.addObject("waterSupply", WaterSupply.values());
+		User userFacility = userService.findUserByEmail(user_email);
+		//user.setEmail(email);
+	
+		
+		if (userFacility == null) {
+			bindingResultFacility
+					.rejectValue("email", "error.user",
+							"No user with email specified found");
+			System.out.println("no user found");
+		}
+		if (bindingResultFacility.hasErrors()) {
+			modelAndView.setViewName("facilityRegistration");
+			System.out.println("binding error "+bindingResultFacility.getAllErrors());
+		} else {
+			
+			facility.setUser(userFacility);
+			facility.setDensity(density);
+			facility.setWaterSupplyQuality(waterSupply);
+			facilityService.saveFacility(facility);
+			
+			modelAndView.addObject("successMessage", "Facility has been registered successfully");
+			modelAndView.addObject("facility", new Facility());
+			modelAndView.setViewName("facilityRegistration");
 			
 		}
 		return modelAndView;

@@ -1,10 +1,13 @@
 package com.fortune.nn;
 
+import java.io.File;
+
 import org.encog.Encog;
 import org.encog.ml.data.MLDataSet;
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.neural.networks.training.propagation.resilient.RPROPType;
 import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
+import org.encog.persist.EncogDirectoryPersistence;
 
 public class TestNetworks {
 	
@@ -22,6 +25,14 @@ public class TestNetworks {
 		System.out.println("evaluation :" + prop);
 		
 		NetworkUtilities.printResults(network, trainingData);
+		
+		
+		System.out.println("****************************************************************************");
+		System.out.println("********************************************************************************");
+		System.out.println("Saving Network");
+
+
+		    EncogDirectoryPersistence.saveObject(new File(Utilities.pathToEncogPersistance()), network);
 
 		Encog.getInstance().shutdown();
 		

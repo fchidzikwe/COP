@@ -26,7 +26,7 @@ public class NetworkUtilities {
 		network.addLayer(new BasicLayer(new ActivationSigmoid(),true,60));
 		network.addLayer(new BasicLayer(new ActivationSigmoid(),true,50));
 		network.addLayer(new BasicLayer(new ActivationSigmoid(),true,20));
-		network.addLayer(new BasicLayer(new ActivationSigmoid(),false,1));
+		network.addLayer(new BasicLayer(new ActivationSigmoid(),false,4));
 		network.getStructure().finalizeStructure();
 		network.reset();
 		
@@ -83,7 +83,7 @@ public class NetworkUtilities {
 		
 		propagationContinue.resume(cont);
 		
-		EncogUtility.trainToError(propagationContinue,0.10);
+		EncogUtility.trainToError(propagationContinue,0.01);
 		
 		System.out.println("**************getting last gradients and update values**********");
 		System.out.println(Arrays.toString((double[])cont.getContents().get(ResilientPropagation.LAST_GRADIENTS)));
@@ -130,7 +130,7 @@ public class NetworkUtilities {
 		long start = System.currentTimeMillis();
 		
 		System.out.println(BasicNetwork.TAG_BEGIN_TRAINING);
-		EncogUtility.trainToError(train, 0.10);
+		EncogUtility.trainToError(train, 0.01);
 		//System.out.println("Final MPROP final error: " + network.getWeight(fromLayer, fromNeuron, toNeuron));
 		System.out.println(BasicNetwork.TAG_END_TRAINING);
 
@@ -141,6 +141,8 @@ public class NetworkUtilities {
 		System.out.println("MPROP time taken to train:" + diff + " seconds.");
 		System.out.println("Final MPROP final error: " + network.calculateError(dataset));
 		System.out.println("*****weights: "+network.dumpWeights());
+		
+		
 		return diff;
 	}
 	

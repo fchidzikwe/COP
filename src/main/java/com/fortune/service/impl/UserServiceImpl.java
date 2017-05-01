@@ -2,15 +2,16 @@ package com.fortune.service.impl;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.fortune.model.Facility;
 import com.fortune.model.Role;
 import com.fortune.model.User;
+import com.fortune.repository.FacilityRepository;
 import com.fortune.repository.RoleRepository;
 import com.fortune.repository.UserRepository;
 import com.fortune.service.UserService;
@@ -20,6 +21,10 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private FacilityRepository facilityRepository;
+	
 	@Autowired
     private RoleRepository roleRepository;
     @Autowired
@@ -47,5 +52,15 @@ public class UserServiceImpl implements UserService{
 		return true;
 		
 	}
+
+
+
+	@Override
+	public Facility getFacility(User user) {
+		Facility facility = facilityRepository.findByUser(user);
+		return facility;
+	}
+
+
 
 }

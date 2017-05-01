@@ -35,5 +35,10 @@ public class Utilities {
 
 		return NNDIR + "/" + "trainedNeuralNetwork";
 	}
+	
+	public static String pathToEncogPersistance() {
+
+		return NNDIR + "/" + "trainedNet";
+	}
 
 }

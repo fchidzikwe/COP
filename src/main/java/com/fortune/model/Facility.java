@@ -1,0 +1,114 @@
+package com.fortune.model;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.Valid;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.fortune.enums.Density;
+import com.fortune.enums.WaterSupply;
+
+@Entity
+@Table(name = "facility")
+public class Facility {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "facility_id")
+	private int id;
+
+	@Column(name = "name")
+	@NotEmpty(message = "*Please provide your name")
+	private String name;
+
+	@Column(name = "density")
+	@NotEmpty(message = "*Please provide your density")
+	private Density density;
+
+	@Column(name = "waterSupplyQuality")
+	@NotEmpty(message = "*Please provide  water_supply quality")
+	private WaterSupply waterSupplyQuality;
+	
+
+	@Column(name = "user_email")
+	@NotEmpty(message = "*Please provide  email of user")
+	private String user_email;
+
+	public String getUser_email() {
+		return user_email;
+	}
+
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
+	}
+
+	@OneToOne(cascade = CascadeType.ALL)
+	private User user;
+	
+	
+	
+
+	@Enumerated(EnumType.STRING)
+	public Density getDensity() {
+		return density;
+	}
+
+	public void setDensity(Density density) {
+		this.density = density;
+	}
+
+	@Enumerated(EnumType.STRING)
+	public WaterSupply getWaterSupplyQuality() {
+		return waterSupplyQuality;
+	}
+
+	public void setWaterSupplyQuality(WaterSupply waterSupplyQuality) {
+		this.waterSupplyQuality = waterSupplyQuality;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Facility() {
+
+	}
+
+	public Facility(String name, Density density, WaterSupply waterSupplyQuality) {
+
+		this.name = name;
+		this.density = density;
+		this.waterSupplyQuality = waterSupplyQuality;
+
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+}
