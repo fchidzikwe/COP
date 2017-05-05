@@ -12,7 +12,7 @@ public class NormaliseController {
 
 	@RequestMapping("/normalise")
 	public ModelAndView normalise(){
-		//NormaliseCsv norm = new NormaliseCsv();
+		
 		NormaliseTrainingData norm = new NormaliseTrainingData();
 		norm.doThings();
 		ModelAndView m = new ModelAndView("uploadCSV");

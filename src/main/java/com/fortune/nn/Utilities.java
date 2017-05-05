@@ -36,6 +36,11 @@ public class Utilities {
 		return NNDIR + "/" + "trainedNeuralNetwork";
 	}
 	
+	public static String pathToSaveAnalsyt() {
+
+		return NNDIR + "/" + "analyst";
+	}
+	
 	public static String pathToEncogPersistance() {
 
 		return NNDIR + "/" + "trainedNet";

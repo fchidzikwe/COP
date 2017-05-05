@@ -48,7 +48,7 @@
 				<form autocomplete="off" action="#"
 					th:action="@{/facilityRegistration}" th:object="${facility}"
 					method="post" class="form-horizontal" role="form">
-					<h2>Facility Registration Form</h2>
+					<h2>FACILITY REGISTRATION FORM</h2>
 					<div class="form-group">
 						<div class="col-sm-9">
 							<label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
@@ -58,21 +58,27 @@
 					</div>
 
 					<div class="form-group">
-						<div class="col-sm-9">
-							<select>
-								<option
-									th:each="density : ${T(com.fortune.enums.Density).values()}"
-									th:value="${density}" th:text="${density.name}"></option>
+						<div class="input-group">
+							<label for="density" class="control-label col-sm-9">DENSITY</label> <select
+								class="form-control" id="density" name="density">
+								<option value="one">LOW</option>
+								<option value="two">MEDIUM</option>
+								<option value="three">HIGH</option>
 							</select>
+
+
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-sm-9">
-							<select>
-								<option
-									th:each="waterSupply : ${T(com.fortune.enums.WaterSupply).values()}"
-									th:value="${waterSupply}" th:text="${waterSupply.quality}"></option>
+						<div class="input-group">
+							<label for ="water_supply" class="control-label">WATER SUPPLY</label> <select
+								class="form-control" id="water_supply" name="waterSupply">
+								<option value="one">POOR</option>
+								<option value="two">STANDARD</option>
+								<option value="three">GOOD</option>
 							</select>
+
+
 						</div>
 					</div>
 					<div class="form-group">

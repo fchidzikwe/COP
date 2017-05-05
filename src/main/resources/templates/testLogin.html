@@ -10,6 +10,12 @@
 <link rel="stylesheet" href="css/style.css" />
 
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#myModal").modal('show');
+	});
+</script>
+
 
 
 </head>
@@ -57,7 +63,7 @@
 	</nav>
 
 
-	<div class="container-fluid" id="hero" >
+	<div class="container-fluid" id="hero">
 		<div id="hero-overlay"></div>
 		<div class="row">
 			<div class="col-md-4 col-md-offset-3">
@@ -111,21 +117,26 @@
 						<button type="button" class="btn btn-link  pull-right small"
 							data-toggle="modal" data-target="#basicModal">Help</button>
 
+						<button type="button" class="btn btn-primary btn-lg"
+							data-toggle="modal" data-target="#myModal">Launch demo
+							modal</button>
+
+
 					</div>
 
 					<!-- Modal definition -->
-					<div class="modal fade" id="basicModal" tabindex="-1" role="dialog"
-						aria-labelledby="basicModal" aria-hidden="true">
-						<div class="modal-dialog">
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">&amp;times;</button>
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
 									<h4 class="modal-title" id="myModalLabel">Modal title</h4>
 								</div>
-								<div class="modal-body">
-									<h3>Modal Body</h3>
-								</div>
+								<div class="modal-body">...</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default"
 										data-dismiss="modal">Close</button>
@@ -157,7 +168,16 @@
 
 
 	<script src="js/jquery.min.js"></script>
+	
 	<script src="js/bootstrap.min.js"></script>
+	
+	
+	<script type="text/javascript">
+	$('#myModal').on('shown.bs.modal', function () {
+		  $('#myInput').focus()
+		})
+	
+	</script>
 </body>
 
 </html>

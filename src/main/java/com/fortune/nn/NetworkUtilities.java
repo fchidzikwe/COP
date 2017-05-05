@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import org.encog.Encog;
 import org.encog.engine.network.activation.ActivationSigmoid;
+import org.encog.engine.network.activation.ActivationTANH;
 import org.encog.ml.data.MLData;
 import org.encog.ml.data.MLDataPair;
 import org.encog.ml.data.MLDataSet;
@@ -23,9 +24,7 @@ public class NetworkUtilities {
 	public static BasicNetwork getNetwork(){
 		BasicNetwork network = new BasicNetwork();
 		network.addLayer(new BasicLayer(null,true,8));
-		network.addLayer(new BasicLayer(new ActivationSigmoid(),true,60));
-		network.addLayer(new BasicLayer(new ActivationSigmoid(),true,50));
-		network.addLayer(new BasicLayer(new ActivationSigmoid(),true,20));
+		network.addLayer(new BasicLayer(new ActivationSigmoid(),true,15));
 		network.addLayer(new BasicLayer(new ActivationSigmoid(),false,4));
 		network.getStructure().finalizeStructure();
 		network.reset();
@@ -154,7 +153,10 @@ public class NetworkUtilities {
 			System.out.println(pair.getInput().getData(0) + "," + pair.getInput().getData(1) + "," + pair.getInput().getData(2)
 					+ "," + pair.getInput().getData(3) + "," + pair.getInput().getData(4) + "," + pair.getInput().getData(5)
 					+ "," + pair.getInput().getData(6) + "," + pair.getInput().getData(7)
-					+ ", actual=" + output.getData(0) + ",ideal=" + pair.getIdeal().getData(0));
+					+ ", actual=" + output.getData(0) + ","+  output.getData(1) + ","+  output.getData(2) + ","+  output.getData(3)
+					
+					+ ",ideal=" + pair.getIdeal().getData(0) + ","+pair.getIdeal().getData(1)+ ","+pair.getIdeal().getData(2)+ ","+pair.getIdeal().getData(3)
+					);
 		}
 	}
 

@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.Valid;
+
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -31,11 +31,11 @@ public class Facility {
 	private String name;
 
 	@Column(name = "density")
-	@NotEmpty(message = "*Please provide your density")
+	@Enumerated(EnumType.STRING)
 	private Density density;
 
 	@Column(name = "waterSupplyQuality")
-	@NotEmpty(message = "*Please provide  water_supply quality")
+	@Enumerated(EnumType.STRING)
 	private WaterSupply waterSupplyQuality;
 	
 
@@ -57,7 +57,7 @@ public class Facility {
 	
 	
 
-	@Enumerated(EnumType.STRING)
+
 	public Density getDensity() {
 		return density;
 	}
@@ -66,7 +66,7 @@ public class Facility {
 		this.density = density;
 	}
 
-	@Enumerated(EnumType.STRING)
+	
 	public WaterSupply getWaterSupplyQuality() {
 		return waterSupplyQuality;
 	}

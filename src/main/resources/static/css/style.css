@@ -31,6 +31,17 @@
   margin-bottom: 20px;
 }
 
+.form > label
+{
+  float: left;
+  clear: right;
+}
+
+.form > input
+{
+  float: right;
+}
+
 /* skin.css Style*/
 .upload-drop-zone {
   color: #ccc;

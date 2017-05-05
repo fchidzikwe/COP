@@ -60,4 +60,14 @@ public class FileController{
 		modelAndView.setViewName("testUpload");
 		return modelAndView;
 	}
+	
+	
+
+	@RequestMapping(value="/diagnosis", method = RequestMethod.GET)
+	public ModelAndView testPage(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("diagnosisPage");
+		return modelAndView;
+	}
+	
 }

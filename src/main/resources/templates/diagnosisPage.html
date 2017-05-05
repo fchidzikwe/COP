@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+	<nav class=" navbar navbar-dark green" role="navigation">
+
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#example-navbar-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+
+			<a class="navbar-brand" href="#">CHOLERA OUTBREAK PREDICTION</a>
+		</div>
+
+		<div class="collapse navbar-collapse" id="example-navbar-collapse">
+
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="HomePage">Home</a></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Administration <span
+						class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="uploadCsv">Data Management</a></li>
+						<li><a href="evaluateNetwork">Network Evaluation</a></li>
+						<li><a href="reports">Reports</a></li>
+					</ul></li>
+
+
+
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="registration"><span
+						class="glyphicon glyphicon-pencil"></span> Sign Up</a></li>
+				<li><a href="testLogin"><span
+						class="glyphicon glyphicon-user"></span> Login</a></li>
+				<li><a href="testUpload"><span
+						class="glyphicon glyphicon-user"></span> Donate</a></li>
+			</ul>
+		</div>
+
+	</nav>
+
+
+
+	<div class="container" id="hero">
+		<div id="hero-overlay"></div>
+		<div class ="row">
+		<form action="/diagnise" method="POST">
+			<h3 class="form-signin-heading" align="center">ENTER PATIENT
+				SYMPTOMS BELOW</h3>
+
+			<h1 data-th-text="${status}">STATUS</h1>
+			<br />
+
+
+		
+
+
+
+			<div class="input-group">
+				<label class="control-label col-xs-2">DIARRHOEA</label> <select
+					class="form-control" id="diarrhoea" name="diarrhoea">
+					<option value="one">NO</option>
+					<option value="two">MILD</option>
+					<option value="three">MODERATE</option>
+					<option value="four">SEVERE</option>
+				</select>
+
+
+			</div>
+			<br />
+
+			<div class="input-group">
+				<label class="control-label col-xs-2">VOMMITING</label> <select
+					class="form-control" id="vommiting" name="vommiting">
+					<option value="one">NO</option>
+					<option value="two">MILD</option>
+					<option value="three">MODERATE</option>
+					<option value="four">SEVERE</option>
+				</select>
+
+
+
+			</div>
+			<br />
+
+			<div class="input-group">
+				<label for="dehydration" class="control-label col-xs-2">DEHYDRATION</label>
+				<select class="form-control" id="dehydration" name="dehydration">
+					<option value="one">NO</option>
+					<option value="two">MILD</option>
+					<option value="three">MODERATE</option>
+					<option value="four">SEVERE</option>
+				</select>
+
+
+
+
+			</div>
+
+
+			<br />
+			<div class="input-group">
+				<label for="blood_pressure" class="control-label col-xs-2">BLOOD
+					PRESSURE</label> <select class="form-control" id="blood_pressure"
+					name="blood_pressure">
+					<option value="one">LOW</option>
+					<option value="two">NORMAL</option>
+					<option value="three">HIGH</option>
+				</select>
+			</div>
+			<br />
+
+			<div class="input-group">
+				<label for="age" class="control-label col-xs-2">AGE</label> <input
+					type="text" id="age" name="age" class="form-control" />
+			</div>
+			<br />
+
+
+			<div class="input-group">
+				<label for="sunken_eyes" class="control-label col-xs-2">SUNKEN
+					EYES</label> <select class="form-control" id="sunken_eyes"
+					name="sunken_eyes">
+					<option value="one">YES</option>
+					<option value="two">NO</option>
+				</select>
+
+			</div>
+			<br />
+
+			<div class="input-group">
+				<label for="gender" class="control-label col-xs-2">GENDER</label> <select
+					class="form-control" id="gender" name="gender">
+					<option value="one">MALE</option>
+					<option value="two">FEMALE</option>
+				</select>
+
+			</div>
+			<br />
+
+			<div class="input-group">
+				<label for="leg_cramps" class="control-label col-xs-2">LEG
+					CRAMPS</label> <select class="form-control" id="leg_cramps"
+					name="leg_cramps">
+					<option value="one">YES</option>
+					<option value="two">NO</option>
+				</select>
+
+			</div>
+
+			<br />
+
+
+
+
+
+
+
+
+			<div align="center" th:if="${param.error}">
+				<p style="font-size: 20; color: #FF1C19;">Make sure you provide
+					everything</p>
+			</div>
+
+			<button class="btn btn-lg btn-primary btn-block" name="Submit"
+				value="Diagnose" type="Submit" th:text="Diagnose"></button>
+			<br>
+
+		</form>
+		</div>
+		
+	</div>
+
+
+
+	<div id="footer">
+		<div class="container-fluid">
+			<div class="col-lg-12">
+				<p>Copyright &copy; Fortune Chidzikwe Capstone 2017</p>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+</html>

@@ -2,7 +2,7 @@ package com.fortune.enums;
 
 public enum WaterSupply {
 
-	BEST("BEST"), GOOD("GOOD"), POOR("POOR");
+	BEST("GOOD"), GOOD("STANDARD"), POOR("POOR");
 
 	private final String quality;
 
