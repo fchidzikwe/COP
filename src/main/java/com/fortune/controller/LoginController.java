@@ -6,11 +6,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.validation.Valid;
 
@@ -31,6 +38,8 @@ import com.fortune.service.FacilityService;
 import com.fortune.service.StorageService;
 import com.fortune.service.UserService;
 import com.fortune.service.UserValidator;
+import com.fortune.utils.DataBaseConnection;
+import java.sql.Connection;
 
 @Controller
 public class LoginController {
@@ -165,45 +174,108 @@ public class LoginController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/predicterPage", method = RequestMethod.GET)
+	@RequestMapping(value = "/predict", method = RequestMethod.GET)
 	public ModelAndView getPredicterPage() {
 		ModelAndView model = new ModelAndView();
 
-		model.setViewName("predicterPage");
+		model.setViewName("predict");
 
 		return model;
 
 	}
 	
 	@RequestMapping(value="/predict", method=RequestMethod.POST)
-	public ModelAndView predict(@RequestParam("facility_name") String facility_name){
+	public ModelAndView predict(@RequestParam("facilityname") String facility_name ,
+								@RequestParam("dateFrom") String dateFrom,
+								@RequestParam("dateTo") String dateTo){
 		ModelAndView model = new ModelAndView();
 		
 		
+		double density, waterSupply;
+		
+		Facility facility = facilityService.findfacilityByName(facility_name);
+		
+		String d = facility.getDensity(); //get facility density
+		String w = facility.getWaterSupplyQuality();
+		
+		switch (d) {
+		case "HIGH":
+			density = 1;
+			break;
+		case "MEDIUM":
+			density = 0.25;
+			break;
+		case "LOW":
+			density =0;
+			break;
+
+		default:
+			break;
+		}
+		
+		
+		switch (w) {
+		case "POOR":
+			waterSupply = 1;
+			break;
+			
+		case "STANDARD":
+			waterSupply = 0.25;
+			break;
+			
+		case "GOOD":
+			waterSupply=0;
+			break;
+
+		default:
+			break;
+		}
+		
+	
 		
 		
 		
+	    DataBaseConnection dbCon = new DataBaseConnection();
+        Connection con = dbCon.getConnection();
+
+        
+        
+        
+        
+        try{
+        String selectSQL = "SELECT `id`, `choleraCaseWeight`, `created`, `density`, "
+        		+ "`facilityname`, `waterSupply` , COUNT(`id`) as Cases FROM `predicter` "
+        		+ "WHERE `facilityname` ='?' AND `created` BETWEEN "
+        		+ "'?' AND '?' GROUP BY `id`";
+        PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
+        preparedStatement.setString(1, facility_name);
+        preparedStatement.setString(2, dateFrom);
+        preparedStatement.setString(3, dateTo);
+
+        System.out.println(preparedStatement);
+        ResultSet rs = preparedStatement.executeQuery();
+        while (rs.next()) {
+            String name = rs.getString("name");
+       }
+        con.close();
+    
+        }
+        catch(SQLException e){
+        	e.printStackTrace();
+        }
+			
+			
+	
 		
-		//select a date range of 3 days
 		
-		 Timestamp timestamp = new Timestamp(new Date().getTime());
-		 
-		    Timestamp currentTimestamp = new Timestamp(new Date().getTime());
-		    
-		    System.out.println("current "+currentTimestamp);
-		    Calendar cal = Calendar.getInstance();
-		    cal.setTimeInMillis(currentTimestamp.getTime());
+		
 		 
 		  
-		 
-		    // subract  3 days
-		    cal.setTimeInMillis(timestamp.getTime());
-		    cal.add(Calendar.DAY_OF_MONTH, - 5);
-		    timestamp = new Timestamp(cal.getTime().getTime());
-		    System.out.println("subracted: "+timestamp);
+		  model.addObject("status", facility_name + " to " +dateTo + " from "+dateFrom);
+		model.setViewName("predict");
 		
 		
-		return null;
+		return model;
 	}
 
 	@RequestMapping(value = "/facilityRegistration", method = RequestMethod.POST)
@@ -277,17 +349,7 @@ public class LoginController {
 		return modelAndView;
 	}
 
-	/*
-	 * @RequestMapping(value="/home", method = RequestMethod.GET) public
-	 * ModelAndView UserHomePage(){ ModelAndView modelAndView = new
-	 * ModelAndView(); Authentication auth =
-	 * SecurityContextHolder.getContext().getAuthentication(); User user =
-	 * userService.findUserByEmail(auth.getName());
-	 * modelAndView.addObject("userName", "Welcome " + user.getName() + " " +
-	 * user.getLastName() + " (" + user.getEmail() + ")");
-	 * modelAndView.addObject("adminMessage","Content Available Only for Users "
-	 * ); modelAndView.setViewName("HomePage"); return modelAndView; }
-	 */
+
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView AdminHomePage() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -298,6 +360,14 @@ public class LoginController {
 		modelAndView.addObject("adminMessage", "Content Available Only for Users ");
 		modelAndView.setViewName("HomePage");
 		return modelAndView;
+	}
+	
+	
+	@RequestMapping(value="/adminHome",method=RequestMethod.POST)
+	public ModelAndView AdminHome(){
+		ModelAndView model = new ModelAndView();
+		model.setViewName("HomePage");
+		return model;
 	}
 
 }

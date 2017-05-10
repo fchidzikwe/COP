@@ -24,16 +24,16 @@ public class PredicterSet {
 	private int id;
 
 	@Column(name = "waterSupply")
-	private int waterSupply;
+	private double waterSupply;
 
 	@Column(name = "facilityname")
 	private String facility;
 
 	@Column(name = "density")
-	private int density;
+	private double density;
 
 	@Column(name = "choleraCaseWeight")
-	private int choleraCaseWeight;
+	private double choleraCaseWeight;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "created", nullable = false, updatable = false)
@@ -47,11 +47,11 @@ public class PredicterSet {
 		this.id = id;
 	}
 
-	public int getWaterSupply() {
+	public double getWaterSupply() {
 		return waterSupply;
 	}
 
-	public void setWaterSupply(int waterSupply) {
+	public void setWaterSupply(double waterSupply) {
 		this.waterSupply = waterSupply;
 	}
 
@@ -63,19 +63,19 @@ public class PredicterSet {
 		this.facility = facility;
 	}
 
-	public int getDensity() {
+	public double getDensity() {
 		return density;
 	}
 
-	public void setDensity(int density) {
+	public void setDensity(double density) {
 		this.density = density;
 	}
 
-	public int getCholeraCaseWeight() {
+	public double getCholeraCaseWeight() {
 		return choleraCaseWeight;
 	}
 
-	public void setCholeraCaseWeight(int choleraCaseWeight) {
+	public void setCholeraCaseWeight(double choleraCaseWeight) {
 		this.choleraCaseWeight = choleraCaseWeight;
 	}
 

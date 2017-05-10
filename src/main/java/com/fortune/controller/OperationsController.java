@@ -143,7 +143,12 @@ public class OperationsController {
 			}
 			
 			Facility currentFacility = facilityService.getFacility(currentUser);
-
+			if(currentFacility ==null){
+				
+				modelAndView.addObject("status", " USER IS NOT REGISTERED TO ANY FACILITY");
+				return modelAndView;
+				
+			}
 			
 			predictorSet.setFacility(currentFacility.getName());
 			
@@ -152,13 +157,13 @@ public class OperationsController {
 
 			switch (diagnosis.toLowerCase()) {
 			case "severe":
-				predictorSet.setCholeraCaseWeight(8);
+				predictorSet.setCholeraCaseWeight(1);
 				break;
 			case "moderate":
-				predictorSet.setCholeraCaseWeight(3);
+				predictorSet.setCholeraCaseWeight(0.25);
 				break;
 			case "mild":
-				predictorSet.setCholeraCaseWeight(1);
+				predictorSet.setCholeraCaseWeight(0);
 				break;
 
 			default:
@@ -169,14 +174,14 @@ public class OperationsController {
 			// setting density in predicter set
 			switch (currentFacility.getDensity()) {
 			case "LOW":
-				predictorSet.setDensity(1);
+				predictorSet.setDensity(0);
 				break;
 			case "MEDIUM":
-				predictorSet.setDensity(3);
+				predictorSet.setDensity(0.25);
 				break;
 
 			case "HIGH":
-				predictorSet.setDensity(8);
+				predictorSet.setDensity(1);
 
 			default:
 				break;
@@ -185,14 +190,14 @@ public class OperationsController {
 			// setting watersupply in predicter set
 			switch (currentFacility.getWaterSupplyQuality()) {
 			case "POOR":
-				predictorSet.setWaterSupply(8);
+				predictorSet.setWaterSupply(1);
 				break;
 			case "STANDARD":
-				predictorSet.setWaterSupply(3);
+				predictorSet.setWaterSupply(0.25);
 				break;
 
 			case "GOOD":
-				predictorSet.setWaterSupply(1);
+				predictorSet.setWaterSupply(0);
 				break;
 
 			default:
@@ -210,7 +215,7 @@ public class OperationsController {
 			
 			predicterSetService.savePredicterSet(predictorSet);
 			
-			modelAndView.addObject("status", "CHOLERA: "+""+diagnosis.toUpperCase() +" reocrd will be saved to database".toUpperCase());
+			modelAndView.addObject("status", "CHOLERA: "+" "+diagnosis.toUpperCase() +" RECORD SAVED TO DATABASE");
 
 		}
 
