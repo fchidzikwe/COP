@@ -17,7 +17,7 @@ public class Reader {
             {
                 setLineTokenizer(new DelimitedLineTokenizer() {
                     {
-                        setNames(new String[] {  "active", "email", "last_name", "name","phoneNumber", "password" });
+                        setNames(new String[] { "id" ,"active", "email", "last_name", "name","phoneNumber", "password" ,"role"});
                     }
                 });
                 setFieldSetMapper(new BeanWrapperFieldSetMapper<User>() {

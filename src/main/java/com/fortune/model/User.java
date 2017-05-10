@@ -1,17 +1,14 @@
 package com.fortune.model;
 
-import java.util.Set;
+import java.io.Serializable;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+
 import javax.persistence.Table;
 
 
@@ -22,8 +19,17 @@ import org.springframework.data.annotation.Transient;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "user_id")
@@ -51,25 +57,25 @@ public class User {
 
 	@Column(name = "active")
 	private int active;
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinTable(name = "facility", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "user"))
-	private Facility facility;
+	@Column(name = "role")
+	private String roles;
+	
+	
 
 	
 	public User(){
 		
 	}
-	public User( int active, String email, String lastName, String name, String password, String phoneNumber) {
+	public User(int id, int active, String email, String lastName, String name, String password, String phoneNumber, String role) {
+		this.id = id;
 		this.active = active;
 		this.email = email;
 		this.lastName = lastName;
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 		this.password= password;
+		this.roles =role;
 		
 		
 	}
@@ -129,18 +135,21 @@ public class User {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public Set<Role> getRoles() {
+	public String getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<Role> roles) {
+	public void setRoles(String roles) {
 		this.roles = roles;
 	}
-	public Facility getFacility() {
-		return facility;
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + ", lastName="
+				+ lastName + ", phoneNumber=" + phoneNumber + ", active=" + active + ", roles=" + roles + "]";
 	}
-	public void setFacility(Facility facility) {
-		this.facility = facility;
-	}
+	
+	
+	
 
 }

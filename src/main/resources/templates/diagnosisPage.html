@@ -29,23 +29,17 @@
 
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="HomePage">Home</a></li>
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Administration <span
-						class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="uploadCsv">Data Management</a></li>
-						<li><a href="evaluateNetwork">Network Evaluation</a></li>
-						<li><a href="reports">Reports</a></li>
-					</ul></li>
+			
 
 
 
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="registration"><span
-						class="glyphicon glyphicon-pencil"></span> Sign Up</a></li>
-				<li><a href="testLogin"><span
+			
+			 <li><span th:utext="${greetings}"></span></li>
+				
+				<li><a href="login"><span
 						class="glyphicon glyphicon-user"></span> Login</a></li>
 				<li><a href="testUpload"><span
 						class="glyphicon glyphicon-user"></span> Donate</a></li>
@@ -58,112 +52,103 @@
 
 	<div class="container" id="hero">
 		<div id="hero-overlay"></div>
-		<div class ="row">
-		<form action="/diagnise" method="POST">
-			<h3 class="form-signin-heading" align="center">ENTER PATIENT
-				SYMPTOMS BELOW</h3>
+		<div class="row">
+			<form action="/diagnise" method="POST">
+				<h3 class="form-signin-heading" align="center">ENTER PATIENT
+					SYMPTOMS BELOW</h3>
 
-			<h1 data-th-text="${status}">STATUS</h1>
-			<br />
+				<h1 data-th-text="${status}">CHOLERA STATUS</h1>
 
-
-		
-
-
-
-			<div class="input-group">
-				<label class="control-label col-xs-2">DIARRHOEA</label> <select
-					class="form-control" id="diarrhoea" name="diarrhoea">
-					<option value="one">NO</option>
-					<option value="two">MILD</option>
-					<option value="three">MODERATE</option>
-					<option value="four">SEVERE</option>
-				</select>
+				<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+					<label class="control-label col-sm-9">WATERY DIARRHOEA</label> <select
+						class="form-control" id="diarrhoea" name="diarrhoea">
+						<option value="one">NO</option>
+						<option value="two">MILD</option>
+						<option value="three">MODERATE</option>
+						<option value="four">SEVERE</option>
+					</select>
 
 
-			</div>
-			<br />
+				</div>
 
-			<div class="input-group">
-				<label class="control-label col-xs-2">VOMMITING</label> <select
-					class="form-control" id="vommiting" name="vommiting">
-					<option value="one">NO</option>
-					<option value="two">MILD</option>
-					<option value="three">MODERATE</option>
-					<option value="four">SEVERE</option>
-				</select>
+				<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+					<label class="control-label col-sm-9">VOMMITING</label> <select
+						class="form-control" id="vommiting" name="vommiting">
+						<option value="one">NO</option>
+						<option value="two">MILD</option>
+						<option value="three">MODERATE</option>
+						<option value="four">SEVERE</option>
+					</select>
 
+				</div>
+				<span class="clearfix">
 
-
-			</div>
-			<br />
-
-			<div class="input-group">
-				<label for="dehydration" class="control-label col-xs-2">DEHYDRATION</label>
-				<select class="form-control" id="dehydration" name="dehydration">
-					<option value="one">NO</option>
-					<option value="two">MILD</option>
-					<option value="three">MODERATE</option>
-					<option value="four">SEVERE</option>
-				</select>
+				<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+					<label for="dehydration" class="control-label col-sm-9">DEHYDRATION</label>
+					<select class="form-control" id="dehydration" name="dehydration">
+						<option value="one">NO</option>
+						<option value="two">MILD</option>
+						<option value="three">MODERATE</option>
+						<option value="four">SEVERE</option>
+					</select>
 
 
 
 
-			</div>
+				</div>
 
+				<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+					<label for="blood_pressure" class="control-label col-sm-9">BLOOD
+						PRESSURE</label> <select class="form-control" id="blood_pressure"
+						name="blood_pressure">
+						<option value="one">LOW</option>
+						<option value="two">NORMAL</option>
+						<option value="three">HIGH</option>
+					</select>
+				</div>
+				<span class="clearfix">
 
-			<br />
-			<div class="input-group">
-				<label for="blood_pressure" class="control-label col-xs-2">BLOOD
-					PRESSURE</label> <select class="form-control" id="blood_pressure"
-					name="blood_pressure">
-					<option value="one">LOW</option>
-					<option value="two">NORMAL</option>
-					<option value="three">HIGH</option>
-				</select>
-			</div>
-			<br />
+				<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+					<label for="age" class="control-label col-xs-2">AGE</label> <input
+						type="number" id="age" name="age" min="1" max="99"
+						class="form-control" required />
+				</div>
+			
+	<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+					<label for="sunken_eyes" class="control-label col-sm-9">SUNKEN
+						EYES</label> <select class="form-control" id="sunken_eyes"
+						name="sunken_eyes">
+						<option value="one">YES</option>
+						<option value="two">NO</option>
+					</select>
 
-			<div class="input-group">
-				<label for="age" class="control-label col-xs-2">AGE</label> <input
-					type="text" id="age" name="age" class="form-control" />
-			</div>
-			<br />
+				</div>
+				
+				<span class="clearfix">
 
+				<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+					<label for="gender" class="control-label col-sm-9">GENDER</label> <select
+						class="form-control" id="gender" name="gender">
+						<option value="one">MALE</option>
+						<option value="two">FEMALE</option>
+					</select>
 
-			<div class="input-group">
-				<label for="sunken_eyes" class="control-label col-xs-2">SUNKEN
-					EYES</label> <select class="form-control" id="sunken_eyes"
-					name="sunken_eyes">
-					<option value="one">YES</option>
-					<option value="two">NO</option>
-				</select>
+				</div>
+				
 
-			</div>
-			<br />
+				<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+					<label for="leg_cramps" class="control-label col-sm-9">LEG
+						CRAMPS</label> <select class="form-control" id="leg_cramps"
+						name="leg_cramps">
+						<option value="one">YES</option>
+						<option value="two">NO</option>
+					</select>
 
-			<div class="input-group">
-				<label for="gender" class="control-label col-xs-2">GENDER</label> <select
-					class="form-control" id="gender" name="gender">
-					<option value="one">MALE</option>
-					<option value="two">FEMALE</option>
-				</select>
+				</div>
 
-			</div>
-			<br />
-
-			<div class="input-group">
-				<label for="leg_cramps" class="control-label col-xs-2">LEG
-					CRAMPS</label> <select class="form-control" id="leg_cramps"
-					name="leg_cramps">
-					<option value="one">YES</option>
-					<option value="two">NO</option>
-				</select>
-
-			</div>
-
-			<br />
+				<br />
+		<br />
+		<br />
 
 
 
@@ -171,24 +156,23 @@
 
 
 
+				<div align="center" th:if="${param.error}">
+					<p style="font-size: 20; color: #FF1C19;">Make sure you provide
+						everything</p>
+				</div>
 
-			<div align="center" th:if="${param.error}">
-				<p style="font-size: 20; color: #FF1C19;">Make sure you provide
-					everything</p>
-			</div>
+				<button class="btn btn-lg btn-primary btn-block" name="Submit"
+					value="Diagnose" type="Submit" th:text="Diagnose"></button>
+				<br>
 
-			<button class="btn btn-lg btn-primary btn-block" name="Submit"
-				value="Diagnose" type="Submit" th:text="Diagnose"></button>
-			<br>
-
-		</form>
+			</form>
 		</div>
-		
+
 	</div>
 
 
 
-	<div id="footer">
+	<div id="footer" class="footer navbar-fixed-bottom">
 		<div class="container-fluid">
 			<div class="col-lg-12">
 				<p>Copyright &copy; Fortune Chidzikwe Capstone 2017</p>

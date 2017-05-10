@@ -9,6 +9,7 @@
 
 <link rel="stylesheet" href="css/style.css" />
 
+<link rel="stylesheet" href="css/custom1.css" />
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -36,26 +37,16 @@
 		<div class="collapse navbar-collapse" id="example-navbar-collapse">
 
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="testHome">Home</a></li>
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="testUpload">Administration <span
-						class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="testUpload">Upload</a></li>
-						<li><a href="#">Test</a></li>
-						<li><a href="#">Generate Reports</a></li>
-					</ul></li>
-
+				<li class="active"><a href="/">Home</a></li>
+					
 
 
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="registration"><span
-						class="glyphicon glyphicon-pencil"></span> Sign Up</a></li>
-				<li><a href="testLogin"><span
+				<li><a href="login"><span
 						class="glyphicon glyphicon-user"></span> Login</a></li>
-				<li><a href="testUpload"><span
+				<li><a href="#"><span
 						class="glyphicon glyphicon-user"></span> Donate</a></li>
 			</ul>
 		</div>
@@ -77,7 +68,10 @@
 					<p style="font-size: 20; color: #FF1C19">Email or Password
 						invalid, please verify</p>
 				</div>
-				<form role="form" th:action="@{/login}" method="POST">
+				<form role="form" th:action="@{/processlogin}" method="POST">
+				
+					<span th:utext="${loginMessage}"></span>
+					
 					<div class="form-group">
 						<label class="control-label">E-Mail</label> <input
 							class="form-control" id="email" name="email"
@@ -85,7 +79,7 @@
 					</div>
 					<div class="form-group">
 						<label for="inputPassword" class="control-label">Password</label>
-						<input th:placeholder="password" id="password" name="password"
+						<input th:placeholder="password" id="password" name="password" type="password"
 							class="form-control">
 					</div>
 
@@ -100,10 +94,10 @@
 
 				</form>
 
-				<form th:action="@{/registration}" method="get">
+				<!-- <form th:action="@{/registration}" method="get">
 					<button class="btn btn-md btn-warning btn-block" type="Submit">Sign
 						Up</button>
-				</form>
+				</form> -->
 
 				<div class="row">
 					<div class="col-xs-6 col-md-8">
@@ -117,9 +111,6 @@
 						<button type="button" class="btn btn-link  pull-right small"
 							data-toggle="modal" data-target="#basicModal">Help</button>
 
-						<button type="button" class="btn btn-primary btn-lg"
-							data-toggle="modal" data-target="#myModal">Launch demo
-							modal</button>
 
 
 					</div>

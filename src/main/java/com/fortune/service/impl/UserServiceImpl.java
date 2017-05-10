@@ -1,18 +1,14 @@
 package com.fortune.service.impl;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.fortune.model.Facility;
-import com.fortune.model.Role;
 import com.fortune.model.User;
 import com.fortune.repository.FacilityRepository;
-import com.fortune.repository.RoleRepository;
 import com.fortune.repository.UserRepository;
 import com.fortune.service.UserService;
 
@@ -25,8 +21,7 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private FacilityRepository facilityRepository;
 	
-	@Autowired
-    private RoleRepository roleRepository;
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
@@ -39,16 +34,16 @@ public class UserServiceImpl implements UserService{
 	public void saveUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
-        Role userRole = roleRepository.findByRole("ADMIN");
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+       // Role userRole = roleRepository.findByRole("USER");
+      
 		userRepository.save(user);
 	}
 
 	@Override
 	public boolean isAdmin(String  email) {
-		User user = userRepository.findByEmail(email);
-		Set<Role> userRoles = user.getRoles();
-		//search for role if isadmin return true
+		//User user = userRepository.findByEmail(email);
+		//Set<Role> userRoles = user.getRoles();
+		//search for role if is admin return true
 		return true;
 		
 	}
@@ -59,6 +54,12 @@ public class UserServiceImpl implements UserService{
 	public Facility getFacility(User user) {
 		Facility facility = facilityRepository.findByUser(user);
 		return facility;
+	}
+
+	@Override
+	public User findUserByName(String name) {
+		// TODO Auto-generated method stub
+		return userRepository.findByName(name);
 	}
 
 

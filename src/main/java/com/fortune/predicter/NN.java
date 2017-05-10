@@ -7,25 +7,68 @@ public class NN {
 	
 	Random rand = new Random();
 	 
-    // Inputs for xor problem
-    final float inputs[][] = { { 1, 1 }, { 1, 0 }, { 0, 1 }, { 0, 0 } };
+    // Inputs for predicter problem
+    final float inputs[][] = {
+    		
+    		
+    		// density, date-range<3 days, water supply, # of cases>3
+    		
+    		
+    		{0,0,0,0}, 				
+    		{0,0,0,1}, 
+    		{0,0,1,0}, 
+    		{0,0,1,1},
+    		{0,1,0,0}, 
+    		{0,1,0,1}, 
+    		{0,1,1,0}, 
+    		{0,1,1,1},
+    		{1,0,0,0}, 
+    		{1,0,0,1}, 
+    		{1,0,1,0}, 
+    		{1,0,1,1},
+    		{1,1,0,0}, 
+    		{1,1,0,1}, 
+    		{1,1,1,0}, 
+    		{1,1,1,1}
+    		
+    
+    };
     // Corresponding outputs
-    final float expectedOutputs[][] = { { 0 }, { 1 }, { 1 }, { 0 } };
-    double resultOutputs[][] = { { -1 }, { -1 }, { -1 }, { -1 } };
+    final float expectedOutputs[][] = {
+    		{ 0 }, 
+    		{ 0 },
+    		{ 0 },
+    		{ 0 },
+    		{ 0 }, 
+    		{ 1 },
+    		{ 0 },
+    		{ 1 }, 
+    		{ 0 },
+    		{ 0 },
+    		{ 0 }, 
+    		{ 1 },
+    		{ 0 },
+    		{ 1 }, 
+    		{ 1 },
+    		{ 1 },
+    		
+    
+    };
+    double resultOutputs[][] = { { -1 }, { -1 }, { -1 }, { -1 },{ -1 }, { -1 }, { -1 }, { -1 },{ -1 }, { -1 }, { -1 }, { -1 }, { -1 }, { -1 }, { -1 }, { -1 }};
     double output[];
  
     final int INPUT=0;
     final int HIDDEN=1;
     final int OUTPUT=2;
      
-    final static int SIZE = 9; // 2 2 1 layers, gives 9 weights total
+    final static int SIZE = 49; // 4 8 1 layers, gives 49 weights total
     public double[] chromosome = new double[SIZE];
  
     final ArrayList<Neuron> inputLayer = new ArrayList<Neuron>();
     final ArrayList<Neuron> hiddenLayer = new ArrayList<Neuron>();
     final ArrayList<Neuron> outputLayer = new ArrayList<Neuron>();
     final Neuron bias = new Neuron();
-    final static int layers[] = { 2, 2, 1 }; // input, hidden, output
+    final static int layers[] = { 4, 8, 1 }; // input, hidden, output
     final static int randomWeightMultiplier = 30;
  
     float learningRate = 1f;
